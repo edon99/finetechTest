@@ -1,0 +1,25 @@
+{% extends "receipting/base.html" %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'receipting/style.css' %}">
+    <title>Signup Page</title>
+</head>
+<body>
+<div class="content">  
+    <div style="width: 500px;" class="container">
+        <form method="post" class="form">
+            {% csrf_token %}
+	        <h2>Sign Up</h2>
+	        {{ form }}		
+            <button type="submit">Signup</button>
+        </form>
+    </div>
+    </div>
+</body>
+</html>
+{% endblock %}

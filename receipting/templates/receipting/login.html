@@ -1,0 +1,39 @@
+{% extends "receipting/base.html" %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'receipting/style.css' %}">
+    <title>Login Page</title>
+</head>
+<body>
+    <div class="content">
+
+  
+    <div class="container">
+        {% if messages %}
+        {% for message in messages %}
+        {% if message.tags == 'error' %}
+        <div class="error-message">
+            <i>{{ message }}</i>
+        </div>
+        {% endif %}
+        {% endfor %}
+        {% endif %}
+        <form method="post" class="form">
+            {% csrf_token %}	
+            <h2>Login</h2>
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+            <button type="submit">Login</button>
+        </form>
+    </div>
+</div>
+</body>
+</html>
+{% endblock %}

@@ -1,0 +1,63 @@
+{% extends "receipting/base.html" %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <title>Receipts</title>
+</head>
+<body>
+
+<div class="container mt-5">
+    
+    <h2>List of Receipts</h2>
+    <a href="{% url 'new-receipt' %}"><button class="btn btn-primary mb-3 ">Add a Receipt</button></a>
+    <table class="table table-bordered">
+        {% if messages %}
+        {% for message in messages %}
+        {% if message.tags == 'error' %}
+        <div class="success-message">
+            <i>{{ message }}</i>
+        </div>
+        {% endif %}
+        {% endfor %}
+        {% endif %}
+        <thead class="thead-dark">
+            <tr>
+                <th>Store Name</th>
+                <th>Date</th>
+                <th>Item List</th>
+                <th>Total</th>
+                <th>Added by</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for receipt in receipts %}
+            <tr>
+                <td>{{receipt.store_name}}</td>
+                <td>{{receipt.date}}</td>
+                <td>{{receipt.item_list}}</td>
+                <td>${{receipt.total}}</td>
+                <td>{{receipt.user}}</td>
+                <td><a href="{% url 'details-receipt' receipt.id %}">View</a></td>
+                
+            </tr>
+            {% endfor %}
+
+        </tbody>
+    </table>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+
+</body>
+</html>
+
+{% endblock %}
